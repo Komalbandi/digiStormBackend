@@ -13,11 +13,11 @@ class CreateContactTable extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('contact', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('first_name',50);
             $table->string('last_name',50);
-            $table->timestamp('dob');
+            $table->date('dob');
             $table->string('company_name',50);
             $table->enum('position',['admin','staff']);
             $table->string('email',50);

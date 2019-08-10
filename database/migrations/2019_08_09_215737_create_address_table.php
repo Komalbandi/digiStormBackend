@@ -13,7 +13,7 @@ class CreateAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('address', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('contact_id',50);
             $table->enum('type', ['home', 'address']);

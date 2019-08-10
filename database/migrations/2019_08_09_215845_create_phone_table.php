@@ -13,7 +13,7 @@ class CreatePhoneTable extends Migration
      */
     public function up()
     {
-        Schema::create('phones', function (Blueprint $table) {
+        Schema::create('phone', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('contact_id',40);
             $table->enum('type',['work','home','mobile']);
