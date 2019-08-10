@@ -22,9 +22,9 @@ class LoginTest extends TestCase
     public function testAuthentication(){
         $url = config('app.url').'/login';
 
-        $user=User::all();
+        $users=User::all();
 
-        $response = $this->json('POST', $url, ['email' => 'sally', 'password' => 'abc123']);
+        $response = $this->json('POST', $url, ['email' => $users[0]->email, 'password' => 'abc123']);
 
         $response->assertStatus(200);
     }

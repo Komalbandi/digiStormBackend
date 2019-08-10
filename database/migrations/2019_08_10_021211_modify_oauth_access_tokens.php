@@ -13,7 +13,7 @@ class ModifyOauthAccessTokens extends Migration
      */
     public function up()
     {
-        Schema::table('oauth_auth_codes', function (Blueprint $table) {
+        Schema::table('oauth_access_tokens', function (Blueprint $table) {
             $table->string('user_id', 40)->change();
         });
     }
@@ -25,7 +25,7 @@ class ModifyOauthAccessTokens extends Migration
      */
     public function down()
     {
-        Schema::table('oauth_auth_codes', function (Blueprint $table) {
+        Schema::table('oauth_access_tokens', function (Blueprint $table) {
             $table->bigInteger('user_id', 40)->change();
         });
     }

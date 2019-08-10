@@ -22,7 +22,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
         $this->loginValidation->validate($request);
 
         $user = User::Where('email', $request->email)->first();

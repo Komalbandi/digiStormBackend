@@ -18,6 +18,8 @@ Route::post('login', 'Auth\LoginController@login');
 //    return $request->user();
 //});
 
-Route::group(['prefix' => 'contacts', 'middleware' => ['auth:api']], function () {
-    Route::get('/', 'DriverRequestToUserForDriverController@show');
-});
+//Route::group(['prefix' => 'contacts', 'middleware' => ['auth:api']], function () {
+//    Route::get('/', 'ContactController@index');
+//});
+
+Route::get('/contacts','ContactController@index');
