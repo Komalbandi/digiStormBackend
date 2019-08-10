@@ -4,36 +4,36 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use App\Http\Requests\LoginValidation;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+    private $loginValidation;
 
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->loginValidation = new LoginValidation();
+    }
+
+    public function login(Request $request)
+    {
+
+        $this->loginValidation->validate($request);
+
+        $user = User::Where('email', $request->email)->first();
+        if (Hash::check($request->password,$user->password)) {
+            $token = $user->createToken('PersonalAccessToken')->accessToken;
+
+            return response()->json([
+                'token' => $token
+            ], 200);
+        }
+
+        return response()->json(['access denied'], 401);
     }
 }
